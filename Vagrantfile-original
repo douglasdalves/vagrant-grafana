@@ -1,0 +1,67 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+	# The most common configuration options are documented and commented below.
+	# For a complete reference, please see the online documentation at
+	# https://docs.vagrantup.com.
+
+	# Todo ambiente de desenvolvimento Vagrant requer uma caixa. Você pode pesquisar por
+	# boxes at https://vagrantcloud.com/search.
+  config.vm.box = "ubuntu/bionic64"
+
+	  # Desative a verificação de atualização automática da caixa. Se você desabilitar isso, então
+	  # caixas só serão marcadas para atualizações quando o usuário executar
+	  # vagrant box outdated`. Isso não é recomendado.
+	 # config.vm.box_check_update = false
+
+	  # Crie um mapeamento de porta encaminhada que permite o acesso a uma porta específica
+	  # dentro da máquina a partir de uma porta na máquina host. No exemplo abaixo
+	  # accessing "localhost:8080" will access port 80 on the guest machine.
+	  # NOTA: Isso permitirá o acesso público à porta aberta
+	  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+	  # Crie um mapeamento de porta encaminhada que permite o acesso a uma porta específica
+	  # dentro da máquina a partir de uma porta na máquina host e só permite o acesso
+	  # via 127.0.0.1 to disable public access
+	 # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+	  # Crie uma rede privada, que permite acesso apenas do host à máquina
+	  # usando um IP específico.
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+	  # Crie uma rede pública, que geralmente corresponde a uma rede em ponte.
+	  # Redes em ponte fazem a máquina aparecer como outro dispositivo físico em
+	  # sua rede.
+  config.vm.network "public_network"
+
+	  # Compartilhe uma pasta adicional com a VM convidada. O primeiro argumento é
+	  # o caminho no host para a pasta real. O segundo argumento é
+	  # o caminho no convidado para montar a pasta. E o terceiro opcional
+	  # argumento é um conjunto de opções não obrigatórias.
+	# config.vm.synced_folder "../data", "/vagrant_data"
+
+
+	  # Configuração específica do provedor para que você possa ajustar vários
+  config.vm.provider "virtualbox" do |vb|
+      # Exibir a GUI do VirtualBox ao inicializar a máquina
+    #vb.gui = true
+ 
+	  # Personalize a quantidade de memória na VM:
+     vb.memory = "1024"
+  end
+
+#---------------------------------------------------------------------------------------------------------
+	  # Habilite o provisionamento com um script de shell. Provisionadores adicionais, como
+	  # Puppet, Chef, Ansible, Salt e Docker também estão disponíveis. por favor veja o
+
+
+	#config.vm.provision "shell", inline: <<-SHELL
+	#   apt-get update
+	#   apt-get install -y apache2
+	#SHELL
+	#   apt-get install -y apache2
+
+  
+end
